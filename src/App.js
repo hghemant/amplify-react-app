@@ -1,9 +1,10 @@
-import { Amplify } from 'aws-amplify';
+import React from 'react';
+import { Authenticator } from '@aws-amplify/ui-react'; // Import Authenticator for authentication
+import { Amplify } from 'aws-amplify'; // Correct import from aws-amplify
 import awsconfig from './aws-exports';
-import { Authenticator, View, Flex, Button, Heading } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
-import './App.css';
+import '@aws-amplify/ui-react/styles.css'; // Correct path for Amplify UI styles
 
+// Configure Amplify
 Amplify.configure(awsconfig);
 
 function App() {
@@ -12,13 +13,10 @@ function App() {
       <header className="App-header">
         <Authenticator>
           {({ signOut, user }) => (
-            <View>
-              <Flex direction="column" alignItems="center" justifyContent="center">
-                <Heading level={2}>Welcome, {user.username}</Heading>
-                <Button onClick={signOut}>Sign out</Button>
-                <h2> My App Content</h2>
-              </Flex>
-            </View>
+            <div>
+              <h1>Hello, {user.username}</h1>
+              <button onClick={signOut}>Sign out</button>
+            </div>
           )}
         </Authenticator>
       </header>
