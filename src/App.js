@@ -1,22 +1,26 @@
-import logo from './logo.svg';
+import { Amplify } from 'aws-amplify';
+import awsconfig from './aws-exports';
+import { Authenticator, View, Flex, Button, Heading } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
 import './App.css';
+
+Amplify.configure(awsconfig);
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Authenticator>
+          {({ signOut, user }) => (
+            <View>
+              <Flex direction="column" alignItems="center" justifyContent="center">
+                <Heading level={2}>Welcome, {user.username}</Heading>
+                <Button onClick={signOut}>Sign out</Button>
+                <h2> My App Content</h2>
+              </Flex>
+            </View>
+          )}
+        </Authenticator>
       </header>
     </div>
   );
